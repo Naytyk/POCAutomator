@@ -6,17 +6,16 @@ on:
       - 'v*'
   workflow_dispatch:
 
+permissions:
+  contents: write
+  actions: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
 
       - name: Build extension
         run: |
@@ -30,6 +29,7 @@ jobs:
           cd ..
 
       - name: Create Release
+        id: create_release  # Make sure this ID matches the reference below
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -37,15 +37,12 @@ jobs:
           tag_name: ${{ github.ref_name }}
           release_name: POC Automator ${{ github.ref_name }}
           body: |
-            ## Changes in this Release
-            - POC Automator extension package ready for manual installation
-            
             ## Installation Instructions
-            1. Download the POCAutomator-${{ github.ref_name }}.zip file below
-            2. Extract it to a folder
+            1. Download POCAutomator-${{ github.ref_name }}.zip
+            2. Extract to folder
             3. Go to chrome://extensions/
             4. Enable Developer mode
-            5. Click "Load unpacked" and select the extracted folder
+            5. Click "Load unpacked" and select folder
           draft: false
           prerelease: false
 
@@ -54,7 +51,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          upload_url: ${{ steps.create_release.outputs.upload_url }}  # Reference the correct step ID
           asset_path: ./POCAutomator-${{ github.ref_name }}.zip
           asset_name: POCAutomator-${{ github.ref_name }}.zip
           asset_content_type: application/zip
