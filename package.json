@@ -1,0 +1,16 @@
+{
+  "name": "poc-automator",
+  "version": "1.0.0",
+  "description": "Chrome extension to automatically extract POC data from company profile tables",
+  "scripts": {
+    "build": "./scripts/build.sh",
+    "dev": "echo 'Load unpacked extension from src/ folder for development'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YOUR_USERNAME/POCAutomator.git"
+  },
+  "keywords": ["chrome-extension", "data-extraction", "poc", "contacts", "automation"],
+  "author": "Your Name",
+  "license": "MIT"
+}

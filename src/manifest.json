@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "POC Data Extractor",
+  "version": "1.0.0",
+  "description": "Extract contact information from company profile tables including Founders & Key People and Senior Management sections",
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "optional_permissions": [
+    "tabs"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Extract POC Data"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}
