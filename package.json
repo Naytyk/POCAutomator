@@ -3,14 +3,15 @@
   "version": "1.0.0",
   "description": "Chrome extension to automatically extract POC data from company profile tables",
   "scripts": {
-    "build": "./scripts/build.sh",
-    "dev": "echo 'Load unpacked extension from src/ folder for development'"
+    "build": "./scripts/build-all.sh",
+    "build-chrome": "./scripts/build-chromium.sh",
+    "build-firefox": "./scripts/build-firefox.sh"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/YOUR_USERNAME/POCAutomator.git"
+    "url": "https://github.com/naytyk/POCAutomator.git"
   },
   "keywords": ["chrome-extension", "data-extraction", "poc", "contacts", "automation"],
-  "author": "Your Name",
+  "author": "naytyk",
   "license": "MIT"
 }

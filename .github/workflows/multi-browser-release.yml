@@ -1,0 +1,80 @@
+name: Multi-Browser Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build all browser versions
+        run: |
+          chmod +x scripts/*.sh
+          ./scripts/build-all.sh
+
+      - name: Create Multi-Browser Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: POC Automator ${{ github.ref_name }} - Multi-Browser
+          body: |
+            # POC Automator ${{ github.ref_name }} - Multi-Browser Release
+            
+            Extract contact information from "Founders & Key People" and "Senior Management" tables across all major browsers!
+            
+            ## Downloads
+            
+            | Browser | Download | Installation Guide |
+            |---------|----------|-------------------|
+            | **Google Chrome** | [POCAutomator-Chrome.zip](https://github.com/naytyk/POCAutomator/releases/download/${{ github.ref_name }}/POCAutomator-Chrome.zip) | [Chrome Installation](#chrome-installation) |
+            | **Microsoft Edge** | [POCAutomator-Edge.zip](https://github.com/naytyk/POCAutomator/releases/download/${{ github.ref_name }}/POCAutomator-Edge.zip) | [Edge Installation](#edge-installation) |
+            | **Mozilla Firefox** | [POCAutomator-Firefox.zip](https://github.com/naytyk/POCAutomator/releases/download/${{ github.ref_name }}/POCAutomator-Firefox.zip) | [Firefox Installation](#firefox-installation) |
+            
+            ## Installation Instructions
+            
+            ### Chrome Installation
+            1. Download `POCAutomator-Chrome.zip`
+            2. Extract to a folder
+            3. Open Chrome and go to `chrome://extensions/`
+            4. Enable "Developer mode" (top right)
+            5. Click "Load unpacked" and select the extracted folder
+            
+            ### Edge Installation
+            1. Download `POCAutomator-Edge.zip`
+            2. Extract to a folder
+            3. Open Edge and go to `edge://extensions/`
+            4. Enable "Developer mode" (left sidebar)
+            5. Click "Load unpacked" and select the extracted folder
+            
+            ### Firefox Installation
+            1. Download `POCAutomator-Firefox.zip`
+            2. Open Firefox and go to `about:debugging`
+            3. Click "This Firefox"
+            4. Click "Load Temporary Add-on"
+            5. Select the downloaded ZIP file
+            
+            ## Features
+            - Auto-detects contact tables
+            - Extracts names, roles & emails
+            - CSV export functionality
+            - Automatic popup permission handling
+            - Professional results display
+            - Cross-browser compatibility
+            
+            ## Repository
+            https://github.com/naytyk/POCAutomator
+            
+          files: |
+            dist/POCAutomator-Chrome.zip
+            dist/POCAutomator-Edge.zip
+            dist/POCAutomator-Firefox.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

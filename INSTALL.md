@@ -3,55 +3,33 @@
 ## Method 1: Download from GitHub Releases (Recommended)
 
 1. Go to the [Releases page](https://github.com/naytyk/POCAutomator/releases)
-2. Download the latest `POCAutomator-vX.X.X.zip` file
-3. Extract the ZIP file to a folder on your computer
-4. Open Chrome and go to `chrome://extensions/`
-5. Enable **Developer mode** (toggle in top right)
-6. Click **Load unpacked**
-7. Select the extracted folder
-8. The POC Automator extension will appear in your Chrome toolbar
+2. Download the latest version for your browser:
+   - `POCAutomator-Chrome.zip` for Google Chrome
+   - `POCAutomator-Edge.zip` for Microsoft Edge
+   - `POCAutomator-Firefox.zip` for Mozilla Firefox
 
-## Method 2: Clone Repository
+## Chrome Installation
+1. Download `POCAutomator-Chrome.zip`
+2. Extract to a folder
+3. Open Chrome and go to `chrome://extensions/`
+4. Enable **Developer mode** (toggle in top right)
+5. Click **Load unpacked**
+6. Select the extracted folder
+7. POC Automator will appear in your Chrome toolbar
 
-git clone https://github.com/naytyk/POCAutomator.git
-cd POCAutomator
+## Edge Installation
+1. Download `POCAutomator-Edge.zip`
+2. Extract to a folder
+3. Open Edge and go to `edge://extensions/`
+4. Enable **Developer mode** (left sidebar)
+5. Click **Load unpacked**
+6. Select the extracted folder
+7. POC Automator will appear in your Edge toolbar
 
-1. Open Chrome and go to `chrome://extensions/`
-2. Enable **Developer mode**
-3. Click **Load unpacked**
-4. Select the `src/` folder from the cloned repository
-
-## Usage
-
-1. Navigate to a company profile page with contact tables
-2. Click the POC Automator icon in your Chrome toolbar
-3. Click "Extract POC Data" button
-4. If prompted, allow popup permissions
-5. View extracted data in the new tab that opens
-6. Download as CSV if needed
-
-## Updating
-
-### From GitHub Releases:
-- Download the new version and replace the old folder
-- Click the refresh icon in `chrome://extensions/`
-
-### From Repository:
-git pull origin main
-
-Then refresh the extension in `chrome://extensions/`
-
-## Troubleshooting
-
-- **Popup Blocked**: Enable popups for the website in Chrome settings
-- **No Data Found**: Ensure you're on a page with the correct table structure
-- **Permission Denied**: Click "Allow" when the extension requests permissions
-
-## Features
-
-- ✅ Automatic POC data extraction from company profiles
-- ✅ Supports "Founders & Key People" and "Senior Management" tables
-- ✅ CSV export functionality
-- ✅ Automatic popup permission handling
-- ✅ Clean, professional results display
-
+## Firefox Installation
+1. Download `POCAutomator-Firefox.zip`
+2. Open Firefox and go to `about:debugging`
+3. Click **This Firefox**
+4. Click **Load Temporary Add-on**
+5. Select the downloaded ZIP file (no need to extract)
+6. POC Automator will appear in your Firefox toolbar
