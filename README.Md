@@ -4,7 +4,13 @@ A powerful Chrome extension that automatically extracts contact information from
 
 ## Browser Compatibility
 
-[132]
+| Browser       | Engine           | Manifest Version | Extension API       | Status | Notes                          |
+|---------------|------------------|------------------|---------------------|--------|-------------------------------|
+| **Google Chrome**    | Blink (Chromium) | Manifest V3      | `chrome.*`          | ✅ Fully Supported | Primary development target    |
+| **Microsoft Edge**   | Blink (Chromium) | Manifest V3      | `chrome.*`          | ✅ Fully Supported | Uses same build as Chrome     |
+| **Mozilla Firefox**  | Gecko            | Manifest V2      | `browser.*` + polyfill | ✅ Supported | Requires separate build       |
+| **Safari**           | WebKit           | Limited          | `browser.*`         | ⏳ Planned | Future release (requires Xcode) |
+
 
 ### Browser Market Share Support
 - **Chrome**: ~65% market share - Fully Supported
