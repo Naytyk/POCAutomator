@@ -17,7 +17,7 @@ See [INSTALL.md](INSTALL.md) for detailed installation instructions.
 
 ## Quick Start
 
-1. Install the extension from [Releases](https://github.com/YOUR_USERNAME/POCAutomator/releases)
+1. Install the extension from [Releases](https://github.com/naytyk/POCAutomator/releases)
 2. Navigate to any company profile page
 3. Click the POC Automator icon
 4. Click "Extract POC Data"
@@ -26,6 +26,6 @@ See [INSTALL.md](INSTALL.md) for detailed installation instructions.
 ## Distribution for Organizations
 
 ### For End Users:
-1. Download from [Releases](https://github.com/YOUR_USERNAME/POCAutomator/releases)
+1. Download from [Releases](https://github.com/naytyk/POCAutomator/releases)
 2. Follow installation guide
 3. Start extracting POC data immediately
