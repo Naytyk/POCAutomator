@@ -1,8 +1,8 @@
 // Cross-browser compatibility layer
 (function() {
-    // Detect browser API namespace
-    const api = typeof browser !== 'undefined' ? browser : chrome;
-    const isFirefox = typeof browser !== 'undefined';
+    // Detect browser API namespace (using let instead of const)
+    let api = typeof browser !== 'undefined' ? browser : chrome;
+    let isFirefox = typeof browser !== 'undefined';
 
     document.addEventListener('DOMContentLoaded', function() {
         const extractBtn = document.getElementById('extractBtn');
@@ -12,7 +12,7 @@
             try {
                 // Check popup permission first
                 if (!isFirefox) {
-                    const canOpenPopups = await checkPopupPermission();
+                    let canOpenPopups = await checkPopupPermission(); // Changed const to let
                     if (!canOpenPopups) {
                         showStatus('Popup permission required for results display', 'error');
                         return;
@@ -20,8 +20,8 @@
                 }
 
                 // Get active tab
-                const tabs = await queryTabs({ active: true, currentWindow: true });
-                const tab = tabs[0];
+                let tabs = await queryTabs({ active: true, currentWindow: true }); // Changed const to let
+                let tab = tabs; // Changed const to let
 
                 // Execute script based on browser
                 if (isFirefox) {
@@ -104,25 +104,25 @@
         }
 
         async function extractTableData(tableContainer) {
-            const extractedData = [];
-            const rows = tableContainer.querySelectorAll('.comp--gridtable__row');
+            let extractedData = []; // Changed const to let
+            let rows = tableContainer.querySelectorAll('.comp--gridtable__row'); // Changed const to let
             
             for (let i = 0; i < rows.length; i++) {
-                const row = rows[i];
-                const nameCell = row.querySelector('[data-walk-through-id*="-cell-name"]');
-                const designationCell = row.querySelector('[data-walk-through-id*="-cell-designation"]');
+                let row = rows[i]; // Changed const to let
+                let nameCell = row.querySelector('[data-walk-through-id*="-cell-name"]'); // Changed const to let
+                let designationCell = row.querySelector('[data-walk-through-id*="-cell-designation"]'); // Changed const to let
                 
                 if (!nameCell) continue;
                 
-                let nameText = nameCell.textContent.trim().replace(/^\d+\.\s*/, '');
-                nameText = nameText.split('\n')[0].trim();
-                const designation = designationCell ? designationCell.textContent.trim() : '';
+                let nameText = nameCell.textContent.trim().replace(/^\d+\.\s*/, ''); // Changed const to let
+                nameText = nameText.split('\n').trim();
+                let designation = designationCell ? designationCell.textContent.trim() : ''; // Changed const to let
                 
-                const emailIcon = nameCell.querySelector('span.fa-envelope');
-                let email = '';
+                let emailIcon = nameCell.querySelector('span.fa-envelope'); // Changed const to let
+                let email = ''; // Changed const to let
                 
                 if (emailIcon) {
-                    const existingDropdowns = document.querySelectorAll('.listDropdown__wrapper');
+                    let existingDropdowns = document.querySelectorAll('.listDropdown__wrapper'); // Changed const to let
                     existingDropdowns.forEach(dropdown => {
                         if (dropdown.style.display !== 'none') {
                             dropdown.style.display = 'none';
@@ -132,9 +132,9 @@
                     emailIcon.click();
                     await delay(500);
                     
-                    const emailDropdown = document.querySelector('.listDropdown__wrapper:not([style*="display: none"])');
+                    let emailDropdown = document.querySelector('.listDropdown__wrapper:not([style*="display: none"])'); // Changed const to let
                     if (emailDropdown) {
-                        const emailLink = emailDropdown.querySelector('a[href^="mailto:"]');
+                        let emailLink = emailDropdown.querySelector('a[href^="mailto:"]'); // Changed const to let
                         if (emailLink) {
                             email = emailLink.textContent.trim();
                         }
@@ -156,30 +156,30 @@
 
         (async function() {
             try {
-                const targetSections = ["Founders & Key People", "Senior Management"];
-                let allData = [];
-                const headers = document.querySelectorAll('.txn--dp-subheader');
+                let targetSections = ["Founders & Key People", "Senior Management"]; // Changed const to let
+                let allData = []; // Changed const to let
+                let headers = document.querySelectorAll('.txn--dp-subheader'); // Changed const to let
                 
                 for (let header of headers) {
-                    const sectionTitle = header.textContent.trim();
+                    let sectionTitle = header.textContent.trim(); // Changed const to let
                     if (targetSections.includes(sectionTitle)) {
-                        let tableContainer = header.parentElement.querySelector('.comp--gridtable__wrapper-v2');
+                        let tableContainer = header.parentElement.querySelector('.comp--gridtable__wrapper-v2'); // Changed const to let
                         if (!tableContainer) {
-                            const nextDiv = header.parentElement.nextElementSibling;
+                            let nextDiv = header.parentElement.nextElementSibling; // Changed const to let
                             if (nextDiv) {
                                 tableContainer = nextDiv.querySelector('.comp--gridtable__wrapper-v2');
                             }
                         }
                         
                         if (tableContainer) {
-                            const sectionData = await extractTableData(tableContainer);
+                            let sectionData = await extractTableData(tableContainer); // Changed const to let
                             allData = allData.concat(sectionData);
                         }
                     }
                 }
                 
-                // Create results window with enhanced features
-                let newWindow = null;
+                // Create results window
+                let newWindow = null; // Changed const to let
                 try {
                     newWindow = window.open('', '_blank', 'width=1200,height=700,scrollbars=yes,resizable=yes');
                 } catch (e) {
@@ -191,7 +191,7 @@
                     return;
                 }
                 
-                const html = `<!DOCTYPE html>
+                let html = `<!DOCTYPE html>
 <html><head><meta charset="UTF-8"><title>POC Automator - Extract Results</title>
 <style>
 body{font-family:Arial,sans-serif;margin:20px;background:#f5f5f5}
@@ -214,14 +214,14 @@ tr:hover{background:#e3f2fd}
 </head><body>
 <div class="container">
 <h1><div class="logo">PA</div>POC Automator - Extraction Results</h1>
-<div class="stats">📊 <strong>${allData.length} contacts extracted</strong> from company profile tables</div>
-<button class="download-btn" onclick="downloadCSV()">📥 Download CSV</button>
-<button class="download-btn print-btn" onclick="window.print()">🖨️ Print Results</button>
+<div class="stats">Total records extracted: <strong>${allData.length}</strong></div>
+<button class="download-btn" onclick="downloadCSV()">Download CSV</button>
+<button class="download-btn print-btn" onclick="window.print()">Print Results</button>
 <table>
-<thead><tr><th>POC Role</th><th>POC Name</th><th>POC Email</th></tr></thead><tbody>`;
+<thead><tr><th>POC Role</th><th>POC Name</th><th>POC Email</th></tr></thead><tbody>`; // Changed const to let
 
                 allData.forEach(item => {
-                    const emailDisplay = item.pocEmail || '<span class="no-email">Email not found</span>';
+                    let emailDisplay = item.pocEmail || '<span class="no-email">Email not found</span>'; // Changed const to let
                     html += `<tr><td>${item.pocRole}</td><td>${item.pocName}</td><td>${emailDisplay}</td></tr>`;
                 });
 
@@ -242,7 +242,7 @@ function downloadCSV() {
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'poc-data-' + new Date().toISOString().split('T')[0] + '.csv';
+    a.download = 'poc-data-' + new Date().toISOString().split('T') + '.csv';
     a.click();
     window.URL.revokeObjectURL(url);
 }
